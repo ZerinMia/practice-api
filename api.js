@@ -1,50 +1,36 @@
-const loadSingelUser = () => {
-    fetch('https://randomuser.me/api/')
-        .then(res => res.json())
-        .then(data => displaySingle(data.results[0]))
-}
-loadSingelUser()
-
-const displaySingle = user => {
-    console.log(user)
-}
-
-
-
-//mealdb
-
-const toggelSpinner = displayStyle => {
+//meal db
+/*----------- STEP3------------- */
+const toggleSpinner = displayStyle => {
     document.getElementById('spinner').style.display = displayStyle;
 }
-const toggelSearchResult = displayStyle => {
+const toggleSearchResult = displayStyle => {
     document.getElementById('meals').style.display = displayStyle;
 }
+/* --------------------STEP2------------- */
 const searchMeal = () => {
     const searchText = document.getElementById('search-field').value;
-
     //show spinner
-    toggelSpinner('block');
-    toggelSearchResult('none')
+    toggleSpinner('block');
+    toggleSearchResult('none');
 
     loadMeals(searchText);
     document.getElementById('search-field').value = '';
-
 }
 
+/* ----------------STEP 1---------------- */
 const loadMeals = searchText => {
     const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`;
     fetch(url)
         .then(res => res.json())
         .then(data => displayMeals(data.meals))
 }
-
-loadMeals('fish')
+loadMeals('fish');
 
 const displayMeals = meals => {
     const container = document.getElementById('meals');
     container.textContent = '';
     meals?.forEach(meal => {
-        console.log(meal)
+        console.log(meal);
         const div = document.createElement('div');
         div.innerHTML = `
            <h1>${meal.strMeal}</h1> 
@@ -52,9 +38,9 @@ const displayMeals = meals => {
         `;
         container.appendChild(div);
     })
-    toggelSpinner('none');
-    toggelSearchResult('block')
+    toggleSpinner('none');
+    toggleSearchResult('block')
 }
 const loadMealDetail = mealName => {
-    console.log(mealName);
+    console.log(mealName)
 }
